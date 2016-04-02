@@ -1,0 +1,70 @@
+$gray:#eee;
+$item-width:150px;
+$item-1-height:120px;
+$item-2-height:100px;
+$item-3-height:40px;
+$item-4-height:200px;
+$x-screen: true;
+$s-screen: false;
+
+
+
+@mixin generateFlexBox($flag){
+	@if $flag{
+		//...
+	}@else{
+		.flex-box{
+			align-items: flex-start;
+			align-content: space-between;
+		}
+		.item-4{
+			order: 0;//当画面缩小到640px以后，通过改变item-4的order属性，将item-4放在首位
+		}
+	}
+}
+
+body{
+	margin: 0;
+	padding: 20px;
+
+}
+
+.flex-box{
+	padding: 20px 20px 0 20px;
+	background-color: $gray; 
+	display: flex;
+	justify-content: space-between;//第一个元素紧贴浏览器左边，最后一个元素紧贴浏览器右边，其它元素等距分布
+	align-items: center;//四个元素高度的中间对齐
+	flex-wrap: wrap;
+}
+
+.item{
+	width: $item-width;
+	border: 1px solid red;
+	text-align: center;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	order: 1;
+	margin-bottom: 20px;
+}
+
+.item-1 {
+  line-height: $item-1-height; }
+
+.item-2 {
+  line-height: $item-2-height; }
+
+.item-3 {
+  line-height: $item-3-height; }
+
+.item-4 {
+  line-height: $item-4-height;
+  border-color: blue; }
+
+@media (min-width:641px){
+	@include generateFlexBox($x-screen);
+}
+
+@media (max-width:640px){
+	@include generateFlexBox($s-screen);
+}
